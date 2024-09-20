@@ -1,0 +1,238 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Abonnements - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100">
+    <!-- Hero Section with integrated Features -->
+    <div class="relative min-h-screen overflow-hidden z-50">
+        <img src="{% static 'images/Makadam-80.JPG' %}" alt="Image de fond" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 container mx-auto px-4 py-16 h-full flex flex-col justify-center items-center">
+            <div class="text-white text-center mb-16 mt-60">
+                <h1 class="text-6xl font-bold mb-4">NOS SERVICES</h1>
+                <h2 class="text-5xl font-light">SELON VOS BESOINS</h2>
+            </div>
+            
+            <!-- Features Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl">
+                <a href="{% url 'core:sell_view' 'cardio' %}" class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-500 ease-in-out transform hover:scale-105 hover:bg-black hover:text-gray-200">
+                    <img src="{% static 'images/Why-Older-Men-Should-Embrace-Strength-Training.jpg' %}" alt="Plateau Muscu-Cardio" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">PLATEAU <span class="text-orange-500">MUSCU-CARDIO</span></h3>
+                        <p class="text-gray-400 text-sm">Améliorez vos entraînements avec des équipements modernes disponibles en libre accès de 7h à 22h.
+                        </p>
+                    </div>
+                </a>
+                <a href="{% url 'core:sell_view' 'collectif' %}" class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-500 ease-in-out transform hover:scale-105 hover:bg-black hover:text-gray-200">
+                    <img src="{% static 'images/istockphoto-827881544-640x640.jpg' %}" alt="Cours Collectifs" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">COURS <span class="text-orange-500">COLLECTIFS</span></h3>
+                        <p class="text-gray-400 text-sm">Renforcez votre bien-être mental et physique grâce à des cours de cardio, de renforcement musculaire et des techniques douces.</p>
+                    </div>
+                </a>
+                <a href="{% url 'core:sell_view' 'group' %}" class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-500 ease-in-out transform hover:scale-105 hover:bg-black hover:text-gray-200">
+                    <img src="{% static 'images/photo-cours-collectif.jpg' %}" alt="Small Group" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">SMALL <span class="text-orange-500">GROUP</span></h3>
+                        <p class="text-gray-400 text-sm">Bénéficiez d'un accompagnement personnalisé lors de sessions en petits groupes pour des résultats rapides et stimulants.</p>
+                    </div>
+                </a>
+                <a href="{% url 'core:sell_view' 'personal' %}" class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-500 ease-in-out transform hover:scale-105 hover:bg-black hover:text-gray-200 ">
+                    <img src="{% static 'images/istockphoto-925395994-612x612.jpg' %}" alt="Coaching Personnalisé" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">COACHING <span class="text-orange-500">PERSONNALISÉ</span></h3>
+                        <p class="text-gray-400 text-sm">Atteignez vos objectifs plus rapidement et efficacement grâce à un suivi personnalisé avec un coach certifié</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- activites -->
+<div class="bg-gray-800 text-white"></div>
+<div class="container mx-auto px-4 py-12 flex">
+    <!-- Image à gauche -->
+    <div class="w-1/2 pr-8">  
+        <img src="{% static 'images/istockphoto-1289416200-612x612.JPG' %}" alt="Activités sportives" class="w-full h-full object-cover rounded-lg">
+    </div>
+    
+    <!-- Contenu à droite -->
+    <div class="w-1/2 pl-8">
+        <h2 class="text-5xl font-bold mb-8">
+            NOS
+            <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-700">ACTIVITÉS</span>
+        </h2>
+        
+        <div class="flex mb-8">
+            <div class="w-1/2">
+                <ul class="space-y-2">
+                    <li class="text-orange-500 font-semibold">RENFORCEMENT MUSCULAIRE</li>
+                    <li class="text-orange-500">ENTRAÎNEMENT CARDIO</li>
+                    <li class="text-orange-500">MÉTHODES DOUCES</li>
+                    <li class="text-orange-500">DANSE</li>
+                    <li class="text-orange-500">SPORTS DE COMBAT</li>
+                    <li class="text-orange-500">SPORT POUR ADOS</li>
+                    <li class="text-orange-500">ACTIVITÉS AQUATIQUES</li>
+                </ul>
+            </div>
+            <div class="w-1/2">
+                <p class="text-sm text-gray-300 mb-4">
+                    Le renforcement musculaire accroît la force, améliore la posture, booste le métabolisme et favorise le bien-être mental. Découvrez nos cours pour tonifier tout votre corps et de travailler sur votre posture.
+                </p>
+                <button class="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-600 transition duration-300">
+                    En savoir plus
+                </button>
+            </div>
+        </div>
+        {% if not user.is_authenticated %}
+            <a href="{% url 'core:login' %}" class="bg-orange-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-orange-600 transition duration-300">
+                Nous Rejoindre
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="bg-white py-12 px-4">
+    <div class="container mx-auto">
+      <h2 class="text-5xl font-bold text-gray-800 mb-2">UN ABONNEMENT</h2>
+      <h3 class="text-5xl font-bold text-gray-300 mb-12">SELON VOS BESOINS</h3>
+      
+      <div class="flex justify-between mb-12">
+        <div class="w-1/3 bg-white rounded-lg shadow-lg p-6 mr-4">
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+              <span class="text-gray-600 font-bold">1</span>
+            </div>
+            <h4 class="text-xl font-bold">
+              LÀ OÙ<br><span class="text-orange-500">VOUS VOULEZ</span>
+            </h4>
+          </div>
+          <p class="text-gray-600">Bénéficiez de l'accès à 110 salles de sport L'Appart Fitness</p>
+        </div>
+        
+        <div class="w-1/3 bg-white rounded-lg shadow-lg p-6 mr-4">
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+              <span class="text-gray-600 font-bold">2</span>
+            </div>
+            <h4 class="text-xl font-bold">
+              EN FONCTION DE<br><span class="text-orange-500">VOTRE PROFIL</span>
+            </h4>
+          </div>
+          <p class="text-gray-600">Découvrez nos formules -26 ans et avantage famille</p>
+        </div>
+        
+        <div class="w-1/3 bg-white rounded-lg shadow-lg p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+              <span class="text-gray-600 font-bold">3</span>
+            </div>
+            <h4 class="text-xl font-bold">
+              AVEC OU SANS<br><span class="text-orange-500">ENGAGEMENT</span>
+            </h4>
+          </div>
+          <p class="text-gray-600">C'est vous qui choisissez ce qui vous convient le mieux</p>
+        </div>
+      </div>
+      
+      <div class="text-center mb-12">
+        <button class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition duration-300">
+          Voir les tarifs
+        </button>
+      </div>
+      
+      <div class="flex justify-between">
+        <div class="w-1/2">
+          <h3 class="text-3xl font-bold text-gray-800 mb-6">MES AVANTAGES</h3>
+          <div>
+            <ul class="space-y-4 text-lg text-gray-700">
+                <li>✓ Accès illimité à toutes nos salles</li>
+                <li>✓ Cours collectifs inclus</li>
+                <li>✓ Coaching personnalisé disponible</li>
+                <li>✓ Équipements de pointe</li>
+            </ul>
+        </div>
+        </div>
+        
+        <div class="w-1/2">
+          <h3 class="text-3xl font-bold text-gray-800 mb-6">NOS ADHÉRENTS EN PARLENT</h3>
+          <div class="space-y-6">
+            <blockquote class="italic text-xl text-gray-600 border-l-4 border-orange-500 pl-4">
+                "Un accueil au top et une grande variété d'activités proposées. Je recommande vivement !"
+            </blockquote>
+            <blockquote class="italic text-xl text-gray-600 border-l-4 border-orange-500 pl-4">
+                "Les coachs sont très professionnels et à l'écoute. J'ai fait d'énormes progrès depuis mon inscription."
+            </blockquote>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="bg-gray-100 py-12 px-4">
+    <div class="container mx-auto">
+      <h2 class="text-5xl font-bold text-gray-800 mb-2">DES RECOMMANDATIONS,</h2>
+      <h3 class="text-5xl font-bold text-gray-300 mb-12">DES CONSEILS...</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <img src="{% static 'images/courbatures-eviter-soigner-870x500.JPG' %}" alt="Sport avec courbatures" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-2">Faire du sport avec des courbatures</h4>
+            <p class="text-gray-700 text-sm">S'entraîner avec des courbatures peut être difficile, mais en comprenant les bonnes pratiques, vous pouvez...</p>
+          </div>
+        </div>
+  
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <img src="{% static 'images/reequilibrage-alimentaire.JPG' %}" alt="Rééquilibrage alimentaire" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-2">Découvrez les secrets du rééquilibrage alimentaire</h4>
+            <p class="text-gray-700 text-sm">Le rééquilibrage alimentaire n'est pas un régime classique. C'est une méthode progressive pour manger...</p>
+          </div>
+        </div>
+  
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <img src="{% static 'images/istockphoto-663863476-612x612.JPG' %}" alt="Exercices bas du corps" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-2">Les meilleurs exercices pour muscler le bas du corps</h4>
+            <p class="text-gray-700 text-sm">Muscler ses jambes est un aspect important pour tout programme d'entraînement. Renforcer les...</p>
+          </div>
+        </div>
+  
+        <!-- Card 4 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <img src="{% static 'images/courir-10km-lappart-fitness-2.JPG' %}" alt="Courir 10km" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h4 class="font-bold text-xl mb-2">Se préparer à courir son premier 10km</h4>
+            <p class="text-gray-700 text-sm">Vous souhaitez courir votre premier 10km ? Découvrez les conseils d'Anthony Frontera pour bien vous...</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-center space-x-4">
+        <button class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition duration-300">
+          Voir le blog
+        </button>
+        <button class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition duration-300">
+          S'abonner
+        </button>
+      </div>
+    </div>
+</div>
+
+
+    
+</div>
+
+
+    
+{% endblock %}

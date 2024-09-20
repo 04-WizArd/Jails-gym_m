@@ -1,0 +1,92 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Abonnements - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100">
+    <!-- Hero Section -->
+    <div class="relative">
+        <img src="{% static 'images/istockphoto-670051268-612x612.jpg' %}" alt="Image de fond" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="relative z-10 container mx-auto px-4 py-24 flex flex-col justify-center items-center">
+            <div class="text-white text-center">
+                <h1 class="text-6xl font-bold mb-4 tracking-wider">NOS ABONNEMENTS</h1>
+                <h2 class="text-3xl font-light mb-6">Choisissez une formule adaptée à vos besoins</h2>
+                <a href="#subscriptions" class="bg-orange-500 text-white py-3 px-8 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300">Découvrir</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscription Section -->
+    <div id="subscriptions" class="container mx-auto px-4 py-16">
+        {% if user_subscription %}
+            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-6 mb-12 rounded-lg shadow-lg">
+                <p class="font-bold text-xl mb-2">Votre abonnement actuel :</p>
+                <p class="text-lg">{{ user_subscription.subscription.name }} (expire le {{ user_subscription.end_date|date:"d/m/Y" }})</p>
+            </div>
+        {% else %}
+            <h3 class="text-center text-3xl font-semibold mb-8">Aucun abonnement actif</h3>
+            <p class="text-gray-600 mb-12 text-center text-lg">Sélectionnez une de nos offres ci-dessous :</p>
+        {% endif %}
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {% for subscription in available_subscriptions %}
+                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
+                    <div class="bg-gray-800 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">{{ subscription.name }}</h3>
+                        <p class="text-5xl font-bold text-orange-500 mb-4">{{ subscription.price }}$</p>
+                        <p class="text-sm text-gray-300">{{ subscription.get_duration_display }}</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="text-gray-600 space-y-4 mb-6">
+                            <li>✓ Accès illimité aux équipements</li>
+                            <li>✓ Cours collectifs inclus</li>
+                            <li>✓ Plan personnalisé d'entraînement</li>
+                        </ul>
+                        <a href="{% url 'core:subscribe' subscription.id %}" class="block bg-orange-500 text-white py-3 px-4 rounded-lg text-center text-lg font-semibold hover:bg-orange-600 transition duration-300">Souscrire</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Advantages Section -->
+    <div class="bg-gray-200 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">POURQUOI NOUS CHOISIR ?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <img src="{% static 'icons/equipment.svg' %}" alt="Équipement" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Équipements modernes</h3>
+                    <p class="text-gray-600">Des machines de haute qualité pour vos entraînements</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <img src="{% static 'icons/coach.svg' %}" alt="Coach" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Coachs qualifiés</h3>
+                    <p class="text-gray-600">Des experts pour vous guider et vous motiver</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <img src="{% static 'icons/classes.svg' %}" alt="Cours" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cours variés</h3>
+                    <p class="text-gray-600">Un large éventail de cours pour tous niveaux</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <img src="{% static 'icons/community.svg' %}" alt="Communauté" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Communauté active</h3>
+                    <p class="text-gray-600">Rejoignez une communauté motivante et dynamique</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="bg-orange-500 py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Prêt à vous lancer ?</h2>
+            <p class="text-lg text-white mb-8">Transformez votre corps et votre esprit avec Totally spies Club</p>
+            <a href="#" class="bg-white text-orange-500 py-3 px-8 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">Rejoignez-nous maintenant</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

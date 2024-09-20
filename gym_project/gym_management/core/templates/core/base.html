@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Fitness Club{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM2v2Zh4J3Udx3yQf5xI9B75zY1n0WzBey1e4Jb" crossorigin="anonymous">
+    {% block extra_head %}{% endblock %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+    <header class="sticky top-0 bg-gradient-to-r from-gray-600 to-gray-900 text-white shadow-lg z-10">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center ontainer mx-auto px-4 py-4">
+                <!-- logo -->
+                <a href="/" class="flex items-center space-x-3">
+                    <div class="relative">
+                        <svg class="h-12 w-12 text-orange-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-white opacity-20 rounded-full"></div>
+                    </div>
+                    <div class="font-sans">
+                        <div class="text-3xl font-extrabold tracking-tight text-gray-900">
+                            TOTALLY<span class="text-orange-500">SPIES</span>
+                        </div>
+                        <div class="text-sm font-medium tracking-wider text-gray-500 uppercase">
+                            Dépassez vos limites
+                        </div>
+                    </div>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Accueil</a>
+                    <a href="{% url 'core:subscriptions' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Abonnements</a>
+                    <a href="{% url 'core:sell_view' 'cardio' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Plateau Muscu-Cardio</a>
+                    <a href="{% url 'core:sell_view' 'collectif' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Cours Collectifs</a>
+                    <a href="{% url 'core:sell_view' 'group' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Petit Group</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'core:profile' %}" class="bg-orange-400 text-gray-800 px-4 py-2 rounded-full hover:bg-orange-500 transition duration-300 ease-in-out"><i class="fa-regular fa-user"></i>{{ user.username|capfirst }}</a>
+                        <a href="{% url 'core:logout' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Déconnexion</a>
+                    {% else %}
+                        <a href="{% url 'core:register' %}" class="bg-orange-400 text-blue-800 px-4 py-2 rounded-full hover:bg-orange-500 transition duration-300 ease-in-out">S'inscrire</a>
+                        <a href="{% url 'core:login' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Connexion</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% if messages %}
+    <div class="container mx-auto mt-4">
+        {% for message in messages %}
+            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo and About Section -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Totally spies club</h3>
+                    <p class="mb-4 font-sans">Votre partenaire pour une vie saine et active. Rejoignez-nous et commencez à améliorer votre bien-être dès aujourd'hui !</p>
+                    <p class="text-sm">&copy; 2024 Fitness Club. Tous droits réservés.</p>
+                </div>
+    
+                <!-- Quick Links Section -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul>
+                        <li><a href="#" class="hover:text-orange-300 font-sans">À propos</a></li>
+                        <li><a href="#" class="hover:text-orange-300 font-sans">Services</a></li>
+                        <li><a href="#" class="hover:text-orange-300 font-sans">Programmes</a></li>
+                        <li><a href="#" class="hover:text-orange-300 font-sans">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Info Section -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-4">Nous contacter</h3>
+                    <ul> 
+                        <li class="mb-2"><i class="fas fa-phone-alt mr-2 font-sans"></i> +243 999 000 111</li>
+                        <li class="mb-2"><i class="fas fa-envelope mr-2 font-sans"></i> contact@Spiesclub.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2 font-sans"></i> 123 Rue de la Santé, Kinshasa, RDC</li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter Subscription -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-4">Inscrivez-vous à la newsletter</h3>
+                    <form class="flex flex-col space-y-4">
+                        <input type="email" class="w-full px-4 py-2 text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-300 focus:outline-none" placeholder="Votre adresse e-mail">
+                        <button type="submit" class="bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition duration-300">S'inscrire</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div class="mt-8 border-t border-gray-700 pt-8">
+                <div class="flex justify-between items-center">
+                    <!-- Social Media Links -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-youtube"></i></a>
+                    </div>
+    
+                    <!-- Opening Hours -->
+                    <div class="text-sm text-gray-400">
+                        <p>Horaires d'ouverture : Lundi - Vendredi : 7h - 22h | Samedi - Dimanche : 8h - 20h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
