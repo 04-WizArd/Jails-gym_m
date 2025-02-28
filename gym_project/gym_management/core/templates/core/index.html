@@ -51,134 +51,126 @@
     </div>
 </div>
 
-<!-- activites -->
-<div class="bg-gray-800 text-white"></div>
-<div class="container mx-auto px-4 py-12 flex">
-    <!-- Image à gauche -->
-    <div class="w-1/2 pr-8">  
-        <img src="{% static 'images/istockphoto-1289416200-612x612.JPG' %}" alt="Activités sportives" class="w-full h-full object-cover rounded-lg">
-    </div>
-    
-    <!-- Contenu à droite -->
-    <div class="w-1/2 pl-8">
-        <h2 class="text-5xl font-bold mb-8">
-            NOS
-            <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-700">ACTIVITÉS</span>
-        </h2>
-        
-        <div class="flex mb-8">
-            <div class="w-1/2">
-                <ul class="space-y-2">
-                    <li class="text-orange-500 font-semibold">RENFORCEMENT MUSCULAIRE</li>
-                    <li class="text-orange-500">ENTRAÎNEMENT CARDIO</li>
-                    <li class="text-orange-500">MÉTHODES DOUCES</li>
-                    <li class="text-orange-500">DANSE</li>
-                    <li class="text-orange-500">SPORTS DE COMBAT</li>
-                    <li class="text-orange-500">SPORT POUR ADOS</li>
-                    <li class="text-orange-500">ACTIVITÉS AQUATIQUES</li>
-                </ul>
-            </div>
-            <div class="w-1/2">
-                <p class="text-sm text-gray-300 mb-4">
-                    Le renforcement musculaire accroît la force, améliore la posture, booste le métabolisme et favorise le bien-être mental. Découvrez nos cours pour tonifier tout votre corps et de travailler sur votre posture.
-                </p>
-                <button class="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-600 transition duration-300">
-                    En savoir plus
-                </button>
-            </div>
-        </div>
-        {% if not user.is_authenticated %}
-            <a href="{% url 'core:login' %}" class="bg-orange-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-orange-600 transition duration-300">
-                Nous Rejoindre
-            </a>
-        {% endif %}
-    </div>
-</div>
+<!-- Section Activités -->
+<section class="bg-white py-20">
+  <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+          <!-- Image avec overlay -->
+          <div class="lg:w-1/2 relative overflow-hidden rounded-2xl">
+              <img src="{% static 'images/istockphoto-1289416200-612x612.JPG' %}" 
+                   alt="Activités sportives" 
+                   class="w-full h-[600px] object-cover">
+              <div class="absolute inset-0 bg-black/20"></div>
+          </div>
+          
+          <!-- Contenu -->
+          <div class="lg:w-1/2 space-y-12">
+              <div>
+                  <h2 class="text-4xl font-extrabold tracking-tight">
+                      NOS ACTIVITÉS
+                  </h2>
+                  <div class="w-20 h-1 bg-orange-500 mt-4"></div>
+              </div>
 
+              <div class="grid grid-cols-2 gap-x-12 gap-y-6">
+                  <div>
+                      <ul class="space-y-6">
+                          {% for activity in activities %}
+                          <li class="flex items-center space-x-3 group cursor-pointer">
+                              <div class="w-2 h-2 bg-orange-500 rounded-full group-hover:scale-150 transition-transform"></div>
+                              <span class="font-medium tracking-wide group-hover:text-orange-500 transition-colors">RENFORCEMENT MUSCULAIRE</span>
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                  <div class="space-y-6">
+                      <p class="text-gray-600 leading-relaxed">
+                          Découvrez nos programmes d'entraînement adaptés à tous les niveaux pour atteindre vos objectifs fitness.
+                      </p>
+                      <a href="#" class="inline-flex items-center text-orange-500 font-medium hover:text-orange-600">
+                          En savoir plus
+                          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                          </svg>
+                      </a>
+                  </div>
+              </div>
 
-<div class="bg-white py-12 px-4">
-    <div class="container mx-auto">
-      <h2 class="text-5xl font-bold text-gray-800 mb-2">UN ABONNEMENT</h2>
-      <h3 class="text-5xl font-bold text-gray-300 mb-12">SELON VOS BESOINS</h3>
-      
-      <div class="flex justify-between mb-12">
-        <div class="w-1/3 bg-white rounded-lg shadow-lg p-6 mr-4">
-          <div class="flex items-center mb-4">
-            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center mr-4">
-              <span class="text-gray-600 font-bold">1</span>
-            </div>
-            <h4 class="text-xl font-bold">
-              LÀ OÙ<br><span class="text-orange-500">VOUS VOULEZ</span>
-            </h4>
+              {% if not user.is_authenticated %}
+              <a href="{% url 'core:login' %}" 
+                 class="inline-block px-8 py-4 bg-black text-white font-semibold rounded-lg hover:bg-gray-900 transition-colors">
+                  Commencer maintenant
+              </a>
+              {% endif %}
           </div>
-          <p class="text-gray-600">Bénéficiez de l'accès à 110 salles de sport L'Appart Fitness</p>
-        </div>
-        
-        <div class="w-1/3 bg-white rounded-lg shadow-lg p-6 mr-4">
-          <div class="flex items-center mb-4">
-            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center mr-4">
-              <span class="text-gray-600 font-bold">2</span>
-            </div>
-            <h4 class="text-xl font-bold">
-              EN FONCTION DE<br><span class="text-orange-500">VOTRE PROFIL</span>
-            </h4>
-          </div>
-          <p class="text-gray-600">Découvrez nos formules -26 ans et avantage famille</p>
-        </div>
-        
-        <div class="w-1/3 bg-white rounded-lg shadow-lg p-6">
-          <div class="flex items-center mb-4">
-            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center mr-4">
-              <span class="text-gray-600 font-bold">3</span>
-            </div>
-            <h4 class="text-xl font-bold">
-              AVEC OU SANS<br><span class="text-orange-500">ENGAGEMENT</span>
-            </h4>
-          </div>
-          <p class="text-gray-600">C'est vous qui choisissez ce qui vous convient le mieux</p>
-        </div>
       </div>
-      
-      <div class="text-center mb-12">
-        <button class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition duration-300">
-          Voir les tarifs
-        </button>
+  </div>
+</section>
+
+<!-- Section Abonnements -->
+<section class="bg-gray-50 py-20">
+  <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+          <h2 class="text-4xl font-extrabold tracking-tight">UN ABONNEMENT ADAPTÉ</h2>
+          <p class="text-gray-600 mt-4">Choisissez la formule qui vous correspond le mieux</p>
       </div>
-      
-      <div class="flex justify-between">
-        <div class="w-1/2">
-          <h3 class="text-3xl font-bold text-gray-800 mb-6">MES AVANTAGES</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center space-x-4 mb-6">
+                  <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-800 font-bold">1</span>
+                  <h3 class="text-xl font-bold">LÀ OÙ VOUS VOULEZ</h3>
+              </div>
+              <p class="text-gray-600">Bénéficiez de l'accès à 4 salles de sport Stena's Fitness</p>
+          </div>
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-4 mb-6">
+                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-800 font-bold">2</span>
+                <h3 class="text-xl font-bold">EN FONCTION DE VOTRE PROFIL</h3>
+            </div>
+            <p class="text-gray-600">Découvrez nos formules -26 ans et avantage famille</p>
+          </div>
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-4 mb-6">
+                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-800 font-bold">3</span>
+                <h3 class="text-xl font-bold">AVEC OU SANS ENGAGEMENT</h3>
+            </div>
+            <p class="text-gray-600">C'est vous qui choisissez ce qui vous convient le mieux</p>
+          </div>
+          <!-- Répéter pour les autres options -->
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div>
-            <ul class="space-y-4 text-lg text-gray-700">
-                <li>✓ Accès illimité à toutes nos salles</li>
-                <li>✓ Cours collectifs inclus</li>
-                <li>✓ Coaching personnalisé disponible</li>
-                <li>✓ Équipements de pointe</li>
-            </ul>
-        </div>
-        </div>
-        
-        <div class="w-1/2">
-          <h3 class="text-3xl font-bold text-gray-800 mb-6">NOS ADHÉRENTS EN PARLENT</h3>
-          <div class="space-y-6">
-            <blockquote class="italic text-xl text-gray-600 border-l-4 border-orange-500 pl-4">
-                "Un accueil au top et une grande variété d'activités proposées. Je recommande vivement !"
-            </blockquote>
-            <blockquote class="italic text-xl text-gray-600 border-l-4 border-orange-500 pl-4">
-                "Les coachs sont très professionnels et à l'écoute. J'ai fait d'énormes progrès depuis mon inscription."
-            </blockquote>
-        </div>
-        </div>
-      </div>
-    </div>
-</div>
+              <h3 class="text-2xl font-bold mb-6">VOS AVANTAGES</h3>
+              <ul class="space-y-4">
+                  <li class="flex items-center space-x-3">
+                      <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                      </svg>
+                      <span class="text-gray-700">Accès illimité 24h/24 et 7j/7</span>
+                  </li>
+                  <!-- Répéter pour les autres avantages -->
+              </ul>
+          </div>
 
+          <div>
+              <h3 class="text-2xl font-bold mb-6">TÉMOIGNAGES</h3>
+              <div class="space-y-6">
+                  <blockquote class="p-6 bg-white rounded-xl shadow-sm">
+                      <p class="text-gray-600 italic">"Une expérience fitness exceptionnelle avec des coachs professionnels."</p>
+                      <footer class="mt-4 text-sm font-medium">Marie L.</footer>
+                  </blockquote>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 
 <div class="bg-gray-100 py-12 px-4">
     <div class="container mx-auto">
-      <h2 class="text-5xl font-bold text-gray-800 mb-2">DES RECOMMANDATIONS,</h2>
-      <h3 class="text-5xl font-bold text-gray-300 mb-12">DES CONSEILS...</h3>
+      <h2 class="text-5xl font-bold text-gray-800 mb-2">CONSEILS &</h2>
+      <h3 class="text-5xl font-bold text-gray-300 mb-12">ACTUALITE</h3>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         <!-- Card 1 -->

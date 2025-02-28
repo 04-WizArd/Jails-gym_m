@@ -4,133 +4,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Fitness Club{% endblock %}</title>
+    <title>{% block title %}Totally Spies Club{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM2v2Zh4J3Udx3yQf5xI9B75zY1n0WzBey1e4Jb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     {% block extra_head %}{% endblock %}
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        html {
+			scroll-behavior: smooth;
+		}
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #946241;
+            --accent: #d4a373;
+            --text: #333333;
+            --bg-light: #fafafa;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Lato', sans-serif;
+            color: var(--text);
+            background-color: var(--bg-light);
+            scr
+        }
+
+        .nav-link {
+            @apply text-sm font-medium text-gray-700 hover:text-secondary transition-colors duration-200;
+        }
+
+        .btn {
+            @apply px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 inline-flex items-center justify-center;
+        }
+
+        .btn-primary {
+            @apply bg-primary text-white hover:bg-opacity-90;
+        }
+
+        .btn-secondary {
+            @apply bg-secondary text-white hover:bg-opacity-90;
+        }
+
+        .btn-outline {
+            @apply border border-primary text-primary hover:bg-primary hover:text-white;
+        }
+
+        .header-shadow {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .footer-gradient {
+            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen bg-gray-100">
-
-    <header class="sticky top-0 bg-gradient-to-r from-gray-600 to-gray-900 text-white shadow-lg z-10">
-        <div class="container mx-auto px-4 py-2">
-            <div class="flex justify-between items-center ontainer mx-auto px-4 py-4">
-                <!-- logo -->
-                <a href="/" class="flex items-center space-x-3">
-                    <div class="relative">
-                        <svg class="h-12 w-12 text-orange-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
-                        </svg>
-                        <div class="absolute inset-0 bg-white opacity-20 rounded-full"></div>
-                    </div>
-                    <div class="font-sans">
-                        <div class="text-3xl font-extrabold tracking-tight text-gray-900">
-                            TOTALLY<span class="text-orange-500">SPIES</span>
-                        </div>
-                        <div class="text-sm font-medium tracking-wider text-gray-500 uppercase">
-                            Dépassez vos limites
-                        </div>
-                    </div>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-white header-shadow sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center">
+                    <svg class="h-10 w-10 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L7 9m6-6v7m5-7v7m0-13a9 9 0 110 18 9 9 0 010-18z"></path>
+                    </svg>
+                    <span class="text-2xl font-bold tracking-wide">Stena's Fiteness</span>
                 </a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="/" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Accueil</a>
-                    <a href="{% url 'core:subscriptions' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Abonnements</a>
-                    <a href="{% url 'core:sell_view' 'cardio' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Plateau Muscu-Cardio</a>
-                    <a href="{% url 'core:sell_view' 'collectif' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Cours Collectifs</a>
-                    <a href="{% url 'core:sell_view' 'group' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Petit Group</a>
+
+                <!-- Navigation Desktop -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="nav-link">Accueil</a>
+                    <a href="{% url 'core:subscriptions' %}" class="nav-link">Abonnements</a>
+                    <a href="{% url 'core:sell_view' 'cardio' %}" class="nav-link">Musculation & Cardio</a>
+                    <a href="{% url 'core:sell_view' 'collectif' %}" class="nav-link">Cours Collectifs</a>
+                    <a href="{% url 'core:sell_view' 'group' %}" class="nav-link">Small Group</a>
                 </nav>
-                <div class="flex items-center space-x-4">
+
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'core:profile' %}" class="bg-orange-400 text-gray-800 px-4 py-2 rounded-full hover:bg-orange-500 transition duration-300 ease-in-out"><i class="fa-regular fa-user"></i>{{ user.username|capfirst }}</a>
-                        <a href="{% url 'core:logout' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Déconnexion</a>
+                        <a href="{% url 'core:profile' %}" class="btn btn-secondary">
+                            <i class="fas fa-user-circle mr-2"></i>{{ user.username|capfirst }}
+                        </a>
+                        <a href="{% url 'core:logout' %}" class="btn btn-outline">Déconnexion</a>
                     {% else %}
-                        <a href="{% url 'core:register' %}" class="bg-orange-400 text-blue-800 px-4 py-2 rounded-full hover:bg-orange-500 transition duration-300 ease-in-out">S'inscrire</a>
-                        <a href="{% url 'core:login' %}" class="text-white hover:text-orange-500 transition duration-300 ease-in-out">Connexion</a>
+                        <a href="{% url 'core:register' %}" class="btn btn-secondary">S'inscrire</a>
+                        <a href="{% url 'core:login' %}" class="btn btn-outline">Connexion</a>
                     {% endif %}
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" id="menu-toggle">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-2 space-y-1">
+                <a href="/" class="block py-2 nav-link">Accueil</a>
+                <a href="{% url 'core:subscriptions' %}" class="block py-2 nav-link">Abonnements</a>
+                <a href="{% url 'core:sell_view' 'cardio' %}" class="block py-2 nav-link">Musculation & Cardio</a>
+                <a href="{% url 'core:sell_view' 'collectif' %}" class="block py-2 nav-link">Cours Collectifs</a>
+                <a href="{% url 'core:sell_view' 'group' %}" class="block py-2 nav-link">Small Group</a>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'core:profile' %}" class="block py-2 nav-link">Profil</a>
+                    <a href="{% url 'core:logout' %}" class="block py-2 nav-link">Déconnexion</a>
+                {% else %}
+                    <a href="{% url 'core:register' %}" class="block py-2 nav-link">S'inscrire</a>
+                    <a href="{% url 'core:login' %}" class="block py-2 nav-link">Connexion</a>
+                {% endif %}
             </div>
         </div>
     </header>
 
+    <!-- Messages -->
     {% if messages %}
-    <div class="container mx-auto mt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         {% for message in messages %}
-            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
-                <p>{{ message }}</p>
-            </div>
+        <div class="rounded-lg bg-white p-4 shadow-sm border-l-4 {% if message.tags == 'success' %}border-green-500{% elif message.tags == 'error' %}border-red-500{% else %}border-blue-500{% endif %} mb-4">
+            <p class="text-sm text-gray-700">{{ message }}</p>
+        </div>
         {% endfor %}
     </div>
     {% endif %}
 
-    <main class="flex-grow">
+    <!-- Main Content -->
+    <main class="flex-grow bg-white">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-gray-700 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Logo and About Section -->
-                <div class="mb-6">
-                    <h3 class="text-xl font-semibold mb-4">Totally spies club</h3>
-                    <p class="mb-4 font-sans">Votre partenaire pour une vie saine et active. Rejoignez-nous et commencez à améliorer votre bien-être dès aujourd'hui !</p>
-                    <p class="text-sm">&copy; 2024 Fitness Club. Tous droits réservés.</p>
+    <!-- Footer -->
+    <footer class="bg-black/90 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Stena's fitness</h4>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Votre partenaire bien-être et fitness. Rejoignez notre communauté et transformez votre vie.
+                    </p>
                 </div>
-    
-                <!-- Quick Links Section -->
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
-                    <ul>
-                        <li><a href="#" class="hover:text-orange-300 font-sans">À propos</a></li>
-                        <li><a href="#" class="hover:text-orange-300 font-sans">Services</a></li>
-                        <li><a href="#" class="hover:text-orange-300 font-sans">Programmes</a></li>
-                        <li><a href="#" class="hover:text-orange-300 font-sans">Contact</a></li>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-secondary transition-colors">À Propos</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Services</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Contact</a></li>
                     </ul>
                 </div>
-    
-                <!-- Contact Info Section -->
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-4">Nous contacter</h3>
-                    <ul> 
-                        <li class="mb-2"><i class="fas fa-phone-alt mr-2 font-sans"></i> +243 999 000 111</li>
-                        <li class="mb-2"><i class="fas fa-envelope mr-2 font-sans"></i> contact@Spiesclub.com</li>
-                        <li><i class="fas fa-map-marker-alt mr-2 font-sans"></i> 123 Rue de la Santé, Kinshasa, RDC</li>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+243 999 000 111</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@spiesclub.com</span>
+                        </li>
                     </ul>
                 </div>
-    
-                <!-- Newsletter Subscription -->
-                <div class="mb-6">
-                    <h3 class="text-xl font-bold mb-4">Inscrivez-vous à la newsletter</h3>
-                    <form class="flex flex-col space-y-4">
-                        <input type="email" class="w-full px-4 py-2 text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-300 focus:outline-none" placeholder="Votre adresse e-mail">
-                        <button type="submit" class="bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition duration-300">S'inscrire</button>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <form class="space-y-3">
+                        <input type="email" 
+                               placeholder="Votre email" 
+                               class="w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary">
+                        <button type="submit" class="btn btn-secondary w-full">S'abonner</button>
                     </form>
                 </div>
             </div>
-    
-            <div class="mt-8 border-t border-gray-700 pt-8">
-                <div class="flex justify-between items-center">
-                    <!-- Social Media Links -->
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-youtube"></i></a>
-                    </div>
-    
-                    <!-- Opening Hours -->
-                    <div class="text-sm text-gray-400">
-                        <p>Horaires d'ouverture : Lundi - Vendredi : 7h - 22h | Samedi - Dimanche : 8h - 20h</p>
-                    </div>
+
+            <!-- Bottom Footer -->
+            <div class="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between">
+                <p class="text-sm text-gray-400">© {% now "Y" %} Totally Spies Club. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
     </footer>
-    
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

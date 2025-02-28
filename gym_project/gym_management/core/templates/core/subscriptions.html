@@ -1,92 +1,176 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Abonnements - Fitness Club{% endblock %}
+{% block title %}Abonnements - Totally Spies Club{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100">
+<div class="min-h-screen bg-white">
     <!-- Hero Section -->
-    <div class="relative">
-        <img src="{% static 'images/istockphoto-670051268-612x612.jpg' %}" alt="Image de fond" class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-        <div class="relative z-10 container mx-auto px-4 py-24 flex flex-col justify-center items-center">
-            <div class="text-white text-center">
-                <h1 class="text-6xl font-bold mb-4 tracking-wider">NOS ABONNEMENTS</h1>
-                <h2 class="text-3xl font-light mb-6">Choisissez une formule adaptée à vos besoins</h2>
-                <a href="#subscriptions" class="bg-orange-500 text-white py-3 px-8 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300">Découvrir</a>
+    <div class="relative h-[60vh] sm:h-[70vh]">
+        <img src="{% static 'images/istockphoto-670051268-612x612.jpg' %}" 
+             alt="Image de fond" 
+             class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center max-w-4xl mx-auto px-4">
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+                    VOTRE TRANSFORMATION<br>COMMENCE ICI
+                </h1>
+                <p class="text-lg sm:text-xl text-white/90 mb-8 font-light">
+                    Des abonnements adaptés à vos objectifs, sans engagement
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#subscriptions" 
+                       class="bg-white text-black px-8 py-3 rounded text-sm uppercase font-medium tracking-wider hover:bg-white/90 transition duration-300">
+                        Voir les offres
+                    </a>
+                    <a href="#contact" 
+                       class="border border-white text-white px-8 py-3 rounded text-sm uppercase font-medium tracking-wider hover:bg-white/10 transition duration-300">
+                        Nous contacter
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Current Subscription Alert -->
+    {% if user_subscription %}
+    <div class="bg-black/5 border-l-4 border-black">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="flex-shrink-0 rounded-full p-1 bg-black/10">
+                        <svg class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </span>
+                    <p class="ml-3 text-sm">
+                        <span class="font-medium text-black">Abonnement actif :</span>
+                        <span class="text-black/70">{{ user_subscription.subscription.name }} 
+                            (expire le {{ user_subscription.end_date|date:"d/m/Y" }})</span>
+                    </p>
+                </div>
+                <button type="button" class="text-black/60 hover:text-black transition-colors">
+                    <span class="sr-only">Fermer</span>
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
     <!-- Subscription Section -->
-    <div id="subscriptions" class="container mx-auto px-4 py-16">
-        {% if user_subscription %}
-            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-6 mb-12 rounded-lg shadow-lg">
-                <p class="font-bold text-xl mb-2">Votre abonnement actuel :</p>
-                <p class="text-lg">{{ user_subscription.subscription.name }} (expire le {{ user_subscription.end_date|date:"d/m/Y" }})</p>
+    <div id="subscriptions" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Nos Formules d'Abonnement
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Choisissez l'offre qui correspond le mieux à vos objectifs et à votre budget
+                </p>
             </div>
-        {% else %}
-            <h3 class="text-center text-3xl font-semibold mb-8">Aucun abonnement actif</h3>
-            <p class="text-gray-600 mb-12 text-center text-lg">Sélectionnez une de nos offres ci-dessous :</p>
-        {% endif %}
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {% for subscription in available_subscriptions %}
-                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-                    <div class="bg-gray-800 text-white p-8 text-center">
-                        <h3 class="text-2xl font-bold mb-2">{{ subscription.name }}</h3>
-                        <p class="text-5xl font-bold text-orange-500 mb-4">{{ subscription.price }}$</p>
-                        <p class="text-sm text-gray-300">{{ subscription.get_duration_display }}</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for subscription in available_subscriptions %}
+                <div class="relative bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                    {% if subscription.is_popular %}
+                    <div class="absolute top-0 right-0 bg-black text-white px-4 py-1 text-sm uppercase tracking-wider">
+                        Populaire
                     </div>
-                    <div class="p-6">
-                        <ul class="text-gray-600 space-y-4 mb-6">
-                            <li>✓ Accès illimité aux équipements</li>
-                            <li>✓ Cours collectifs inclus</li>
-                            <li>✓ Plan personnalisé d'entraînement</li>
+                    {% endif %}
+                    
+                    <div class="p-8 text-center">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ subscription.name }}</h3>
+                        <div class="mt-4 flex items-baseline justify-center">
+                            <span class="text-5xl font-extrabold text-gray-900">{{ subscription.price }}$</span>
+                            <span class="ml-1 text-xl text-gray-500">/{{ subscription.get_duration_display }}</span>
+                        </div>
+                        
+                        <ul class="mt-8 space-y-4 text-left">
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span class="ml-3 text-gray-600">Accès illimité 24h/24 et 7j/7</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span class="ml-3 text-gray-600">Cours collectifs en illimité</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span class="ml-3 text-gray-600">Programme personnalisé</span>
+                            </li>
                         </ul>
-                        <a href="{% url 'core:subscribe' subscription.id %}" class="block bg-orange-500 text-white py-3 px-4 rounded-lg text-center text-lg font-semibold hover:bg-orange-600 transition duration-300">Souscrire</a>
+                    </div>
+
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <a href="{% url 'core:subscribe' subscription.id %}" 
+                           class="block w-full text-center bg-black text-white px-6 py-3 rounded text-sm uppercase font-medium tracking-wider hover:bg-black/90 transition duration-300">
+                            Souscrire maintenant
+                        </a>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- Advantages Section -->
-    <div class="bg-gray-200 py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">POURQUOI NOUS CHOISIR ?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                    <img src="{% static 'icons/equipment.svg' %}" alt="Équipement" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Équipements modernes</h3>
-                    <p class="text-gray-600">Des machines de haute qualité pour vos entraînements</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                    <img src="{% static 'icons/coach.svg' %}" alt="Coach" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Coachs qualifiés</h3>
-                    <p class="text-gray-600">Des experts pour vous guider et vous motiver</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                    <img src="{% static 'icons/classes.svg' %}" alt="Cours" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cours variés</h3>
-                    <p class="text-gray-600">Un large éventail de cours pour tous niveaux</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                    <img src="{% static 'icons/community.svg' %}" alt="Communauté" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Communauté active</h3>
-                    <p class="text-gray-600">Rejoignez une communauté motivante et dynamique</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 
-    <!-- Call to Action Section -->
-    <div class="bg-orange-500 py-20">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold text-white mb-6">Prêt à vous lancer ?</h2>
-            <p class="text-lg text-white mb-8">Transformez votre corps et votre esprit avec Totally spies Club</p>
-            <a href="#" class="bg-white text-orange-500 py-3 px-8 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">Rejoignez-nous maintenant</a>
+    <!-- Features Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    L'Excellence au Service de Votre Forme
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Des installations et services haut de gamme pour atteindre vos objectifs
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="relative group">
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <img src="{% static 'images/equipment.jpg' %}" 
+                             alt="Équipements" 
+                             class="w-full h-full object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Équipements Premium</h3>
+                    <p class="text-gray-600">Machines de dernière génération pour des entraînements optimaux</p>
+                </div>
+
+                <!-- Feature 2-4 similaires -->
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+/* Animation subtile pour les cartes d'abonnement */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.subscription-card:hover {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Transitions douces */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+</style>
 {% endblock %}
